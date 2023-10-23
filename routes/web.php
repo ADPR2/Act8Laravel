@@ -28,9 +28,12 @@ use App\Http\Controllers\PruebaController;
 // http://localhost/firstApp/public/    ROOT
 Route::get('/', homeController::class); //Because we are only using the name of the controller and ::class, laravel asume that we are using the method __invoke
 
-//Controller Course by group return string
-Route::controller(courseController::class)->group(function () {
-    Route::get('courses', "index");
-    Route::get('courses/create', "create");
-    Route::get('courses/{course}/{category?}', "show");
-});
+//1. index
+Route::get('/courses', [courseController::class, 'index'])->name('courses.index');
+
+//2. create
+Route::get('/courses/create/', [courseController::class, 'create'])->name('courses.create');
+
+//3. store
+Route::post('/courses', [courseController::class, 'store'])->name('courses.store');
+
