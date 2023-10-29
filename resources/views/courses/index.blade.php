@@ -33,10 +33,36 @@
             <td>{{$course['email']}}</td>
             <td>{{$course['created_at']}}</td>
             <td>{{$course['updated_at']}}</td>
+            <td class="actions-cell">
+            <a class="edit-link" href="{{ route('courses.edit', ['id' => $course->id]) }}">Edit</a>
+            <form action="{{ route('courses.delete', ['id' => $course->id]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="eliminar-link">Eliminar</button>
+            </form>
+
+            </td>
         </tr>
         @endforeach
     </tbody>
 </table>
+
+<style>
+    .edit-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.edit-link:hover {
+    background-color: #0056b3;
+}
+
+</style>
 
 @endsection
 @push('styles')
