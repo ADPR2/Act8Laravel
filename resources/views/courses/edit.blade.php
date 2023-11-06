@@ -4,7 +4,7 @@
 
 <h2> Editar curso existente </h2>
 
-<form class="course-form" action="{{ route('courses.update', $course->id) }}" method="post">
+<form class="course-form" action="{{ route('courses.update', $course->id) }}"  enctype="multipart/form-data"  method="post">
     @csrf
     @method('PUT')
 
@@ -29,6 +29,8 @@
 
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" value="{{ $course->email }}">
+  
+    <input type="file" name="image">
 
     <input type="submit" value="Actualizar curso">
 </form>

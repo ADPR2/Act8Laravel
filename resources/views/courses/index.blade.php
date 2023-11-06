@@ -33,6 +33,12 @@
             <td>{{$course['email']}}</td>
             <td>{{$course['created_at']}}</td>
             <td>{{$course['updated_at']}}</td>
+
+            <td>
+                @if ($course->image_path)
+                <img class="course-image" src="{{ asset('storage/' . $course->image_path)}}" alt="aqui va algo">
+                @endif
+            </td>
             <td class="actions-cell">
             <a class="edit-link" href="{{ route('courses.edit', ['id' => $course->id]) }}">Edit</a>
             <form action="{{ route('courses.delete', ['id' => $course->id]) }}" method="POST">

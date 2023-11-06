@@ -7,7 +7,7 @@
 
 <h2> Agrega un nuevo curso </h2>
 
-<form class="course-form" action="{{ route('courses.store') }}" method="post">
+<form class="course-form" action="{{ route('courses.store') }}" enctype="multipart/form-data" method="post">
 @csrf
 <label for="title">Titulo:</label>
 <input type="text" id="title" name="title">
@@ -30,6 +30,8 @@
 
 <label for="email">Email:</label>
 <input type="email" id="email" name="email">
+
+<input type="file" name="image">
 
 <input type="submit" value="Agregar curso">
 </form>

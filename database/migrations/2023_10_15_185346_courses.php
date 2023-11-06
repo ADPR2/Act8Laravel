@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('email')->unique(); // Instructor's Email, unique
             $table->timestamp('email_verified_at')->nullable(); // Timestamp for when the instructor's email was verified
             $table->timestamps(); // created_at and updated_at
+            $table->string('image_path')->nullable();
         });
     }
 

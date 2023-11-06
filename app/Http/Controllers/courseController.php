@@ -45,6 +45,16 @@ class courseController extends Controller
         $course->instructor = $request->instructor;
         $course->email = $request->email;
         $course->email_verified_at = $request->email_verified_at;
+
+        if($request->hasFile('image')){
+            // Almacena el archivo cargado en un directorio llamado 'coursesImages' dentro del
+            // sistema de archivos 'public', laravel genera automáticamente un nombre unico
+            // y listo jajas
+            
+            $imagePath = $request->file('image')->store('courseImages', 'public');
+            //aqui creo que me regresa la ruta o algo asi no estoy seguro
+            $course->image_path = $imagePath;
+        }
     
         $course->save();
         return redirect()->route('courses.index');
@@ -61,6 +71,16 @@ class courseController extends Controller
     $course->instructor = $request->instructor;
     $course->email = $request->email;
     $course->email_verified_at = $request->email_verified_at;
+    
+    if($request->hasFile('image')){
+        // Almacena el archivo cargado en un directorio llamado 'coursesImages' dentro del
+        // sistema de archivos 'public', laravel genera automáticamente un nombre unico
+        // y listo jajas
+        
+        $imagePath = $request->file('image')->store('courseImages', 'public');
+        //aqui creo que me regresa la ruta o algo asi no estoy seguro
+        $course->image_path = $imagePath;
+    }
 
     $course->save();
 
@@ -74,4 +94,7 @@ class courseController extends Controller
     {
         return view("courses.show", ["course" => $course], ["category" => $category]);
     }
+
+
+
 }
