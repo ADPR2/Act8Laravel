@@ -34,25 +34,28 @@ class courseController extends Controller
     }
 
 
-
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'language' => 'required',
+            'difficulty' => 'required',
+            'instructor' => 'required',
+            'email' => 'required|email',
+            'image' => 'image|nullable|max:1999',
+        ]);
+    
         $course = new Course;
-        $course->title = $request->title;
-        $course->description = $request->description;
-        $course->language = $request->language;
-        $course->difficulty = $request->difficulty;
-        $course->instructor = $request->instructor;
-        $course->email = $request->email;
-        $course->email_verified_at = $request->email_verified_at;
-
+        $course->title = $validatedData['title'];
+        $course->description = $validatedData['description'];
+        $course->language = $validatedData['language'];
+        $course->difficulty = $validatedData['difficulty'];
+        $course->instructor = $validatedData['instructor'];
+        $course->email = $validatedData['email'];
+    
         if($request->hasFile('image')){
-            // Almacena el archivo cargado en un directorio llamado 'coursesImages' dentro del
-            // sistema de archivos 'public', laravel genera automáticamente un nombre unico
-            // y listo jajas
-            
             $imagePath = $request->file('image')->store('courseImages', 'public');
-            //aqui creo que me regresa la ruta o algo asi no estoy seguro
             $course->image_path = $imagePath;
         }
     
